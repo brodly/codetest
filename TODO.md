@@ -14,15 +14,15 @@
     [ ] Serve static files
 
   - Database
-    [ ] Setup table database with user, card, user_card tables
-    [ ] Setup knex
+    [x] Setup table database with user, card, user_card tables
+    [x] Setup knex
     [ ] Build dataset (csv or generation tool)
     [ ] Design Models
-      [ ] User {
+      [x] User {
             id: pri, auto_inc, int
             name: str
           }
-      [ ] Card {
+      [x] Card {
             id; pri, auto_inc,
             name: str,
             desc: str,
