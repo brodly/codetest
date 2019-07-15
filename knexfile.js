@@ -8,6 +8,7 @@ module.exports = {
     migrations: {
       directory: path.join(__dirname, '/database/migrations'),
     },
+    debug: true,
   },
 
   // staging: {
