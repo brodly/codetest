@@ -9,10 +9,17 @@ exports.up = knex => Promise.all([
     table.string('name').notNullable();
     table.string('desc').notNullable();
     table.string('fact').notNullable();
+    table.string('img_url').notNullable();
+  }),
+
+  knex.schema.createTable('users_cards', (table) => {
+    table.integer('user_id');
+    table.integer('card_id');
   }),
 ]);
 
 exports.down = knex => Promise.all([
   knex.schema.dropTable('users'),
   knex.schema.dropTable('cards'),
+  knex.schema.dropTable('user_card'),
 ]);
