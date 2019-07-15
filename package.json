@@ -1,0 +1,44 @@
+{
+  "name": "factoid_cards",
+  "version": "1.0.0",
+  "description": "Display a deck of facts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:dev": "webpack --watch --mode development",
+    "build:prod": "webpack --mode production",
+    "start:dev": "nodemon server/index.js",
+    "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brodly/codetest.git"
+  },
+  "author": "Joshua Marx",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brodly/codetest/issues"
+  },
+  "homepage": "https://github.com/brodly/codetest#readme",
+  "dependencies": {
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.6",
+    "express": "^4.17.1",
+    "knex": "^0.19.0",
+    "nodemon": "^1.19.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.0.0",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.2",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6"
+  }
+}
