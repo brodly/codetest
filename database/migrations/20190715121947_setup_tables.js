@@ -1,14 +1,12 @@
 exports.up = knex => Promise.all([
   knex.schema.createTable('users', (table) => {
     table.increments();
-    table.unique('name');
-    table.string('name').notNullable();
+    table.unique('name').string('name').notNullable();
   }),
 
   knex.schema.createTable('cards', (table) => {
     table.increments();
-    table.unique('name');
-    table.string('name').notNullable();
+    table.unique('name').string('name').notNullable();
     table.string('desc').notNullable();
     table.string('fact').notNullable();
     table.string('img_url').notNullable();
