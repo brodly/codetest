@@ -8,4 +8,6 @@ module.exports = {
     .then(res => res.data),
 
   createCard: card => axios.post('/api/card', card),
+
+  deleteCard: name => axios.delete(`/api/card/${name}`),
 };
