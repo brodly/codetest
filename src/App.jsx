@@ -69,16 +69,14 @@ class App extends Component {
     return (
       <div>
         <div className="header">
-          <h1 className="title">Factoid Cards</h1>
-          <div className="button-container">
-            <Button type="standard" name="Create New Card" event={this.handleOnCreate} />
-            <Button type="standard" name="Update Card" event={this.handleOnUpdate} />
-          </div>
+          <h1 className="title">Crypto Facts</h1>
+          <Button type="primary" name="Create New Card" event={this.handleOnCreate} />
         </div>
         <Card card={cards[currentCard]} />
         <div className="button-container">
           <Button type="alert" name="Delete" event={this.handleOnDelete} />
-          <Button type="standard" name="Next" event={this.handleOnNext} />
+          <Button type="secondary" name="Edit" event={this.handleOnUpdate} />
+          <Button type="primary" name="Next" event={this.handleOnNext} />
         </div>
       </div>
     );
