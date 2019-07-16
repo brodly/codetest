@@ -2,11 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Button = ({ type, name, event }) => (
-  <div className={`button ${type}`}>
-    <button type="button" onClick={event}>
-      {name}
-    </button>
-  </div>
+  <button type="button" className={`button ${type}`} onClick={event}>{name}</button>
 );
 
 Button.propTypes = {
@@ -16,7 +12,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  type: 'Standard',
+  type: 'primary',
   name: 'Button',
   event: () => {},
 };
