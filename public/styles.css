@@ -1,1 +1,94 @@
-styles.css
+* {
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  background-color: aliceblue;
+  padding: 0px 10px;
+  border: 1px solid #DDD;
+  overflow: hidden;
+  vertical-align: top;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+}
+
+.button-container {
+  display: flex;
+  align-self: center;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 300px;
+  margin: auto;
+}
+
+.header .button-container {
+  margin: 0px;
+  width: 250px;
+}
+
+.button {
+  border: 1px solid #DDD;
+  border-radius: 10px;
+  overflow: hidden;
+  vertical-align: top;
+  text-align: center;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.05);
+  padding: 10px;
+  background-color: rgb(147, 186, 223);
+  width: 100px;
+}
+
+.button.alert {
+  background-color: rgb(223, 148, 148);
+}
+
+.card {
+  display: inherit;
+  height: 450px;
+  width: 300px;
+  border: 1px solid #DDD;
+  border-radius: 10px;
+  overflow: hidden;
+  vertical-align: top;
+  margin: 5px auto;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.05);
+  padding: 10px;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-image {
+  display: inherit;
+  margin: 20px auto;
+}
+
+.card-title {
+  font-size: 2rem;
+  margin: 0;
+  text-align: center;
+}
+
+.fact-title {
+  font-size: 1.6rem;
+  line-height: 0rem;
+  margin-bottom: -5px;
+}
+
+.card-text {
+  font-size: 1.6rem;
+  line-height: 2rem;
+}
