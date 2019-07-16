@@ -1,28 +1,80 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable camelcase */
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from '.';
 
-const Card = ({ card }) => {
-  const {
-    name,
-    desc,
-    fact,
-    img_url,
-  } = card;
+class Card extends Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <div className="card">
-      <h3 className="card-title">{name}</h3>
-      <img src={img_url} className="card-image" alt="" />
-      <div className="card-content">
-        <p className="card-text">{desc}</p>
-        <br />
-        <h4 className="fact-title">{fact !== '' ? 'Factoid:' : ''}</h4>
-        <p className="card-text">{fact}</p>
+    this.state = {
+      name: 'Title',
+      desc: 'Description',
+      fact: 'Fact',
+      img_url: 'Image Url',
+      editMode: false,
+    };
+
+    this.handleEdit = this.handleEdit.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  componentDidMount() {
+    const { card } = this.props;
+    const { name, desc, fact, img_url } = card;
+    this.setState({ name, desc, fact, img_url });
+  }
+
+  onChange(e) {
+    console.log(e.target.id);
+    this.setState({ [e.target.id]: e.target.value });
+  }
+
+  handleEdit() {
+    let { editMode } = this.state;
+    editMode = !editMode;
+    this.setState({ editMode });
+  }
+
+  render() {
+    const { editMode } = this.state;
+    const { card } = this.props;
+    const { name, desc, fact, img_url } = card;
+
+    return (
+      <div className="card">
+        <h3 className="card-title">
+          {editMode
+            ? (<input id="name" type="text" value={this.state.name} onChange={this.onChange} />)
+            : name}
+        </h3>
+        {editMode
+          ? (<input id="img_url" type="text" value={this.state.img_url} onChange={this.onChange} />)
+          : (<img src={img_url} className="card-image" alt="" />)}
+        <div className="card-content">
+          <p className="card-text">
+            {editMode
+              ? (<input id="desc" type="text" value={this.state.desc} onChange={this.onChange} />)
+              : desc}
+          </p>
+          <br />
+          <h4 className="fact-title">
+            {fact !== ''
+              ? 'Factoid:'
+              : ''}
+          </h4>
+          <p className="card-text">
+            {editMode
+              ? (<input id="fact" type="text" value={this.state.fact} onChange={this.onChange} />)
+              : fact}
+          </p>
+        </div>
+        <Button type="secondary" name="Edit" event={this.handleEdit} />
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 Card.propTypes = {
   card: PropTypes.shape({
