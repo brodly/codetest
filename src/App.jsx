@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { Component } from 'react';
 import routes from './routes';
 import { Card, Button } from './components';
@@ -8,7 +9,13 @@ class App extends Component {
     super();
     this.state = {
       cards: [],
-      currentCard: 0,
+      currentCardIndex: 0,
+      currentCard: {
+        name: '',
+        desc: '',
+        fact: '',
+        img_url: '',
+      },
     };
 
     this.fetchCard = this.fetchCard.bind(this);
@@ -17,9 +24,7 @@ class App extends Component {
     this.handleOnDelete = this.handleOnDelete.bind(this);
     this.handleOnUpdate = this.handleOnUpdate.bind(this);
     this.handleOnCreate = this.handleOnCreate.bind(this);
-  }
 
-  componentDidMount() {
     this.fetchCards();
   }
 
@@ -33,9 +38,10 @@ class App extends Component {
   }
 
   async fetchCards() {
+    const { currentCardIndex } = this.state;
     try {
       const cards = await routes.fetchCards();
-      this.setState({ cards });
+      this.setState({ cards, currentCard: cards[currentCardIndex] });
     } catch (err) {
       console.log(err);
     }
@@ -43,12 +49,14 @@ class App extends Component {
 
   handleOnNext() {
     const { cards } = this.state;
-    let { currentCard } = this.state;
+    let { currentCard, currentCardIndex } = this.state;
 
-    if (currentCard === cards.length - 1) currentCard = 0;
-    else currentCard += 1;
+    if (currentCardIndex === cards.length - 1) currentCardIndex = 0;
+    else currentCardIndex += 1;
 
-    this.setState({ currentCard });
+    currentCard = cards[currentCardIndex];
+
+    this.setState({ currentCard, currentCardIndex });
   }
 
   handleOnCreate(card) {
@@ -60,11 +68,24 @@ class App extends Component {
   }
 
   handleOnDelete() {
+    let { cards, currentCardIndex, currentCard } = this.state;
 
+    // eslint-disable-next-line no-alert
+    const del = confirm('Are you sure you want to delete this card?');
+
+    if (del) {
+      cards = cards.filter(item => item.name !== currentCard.name);
+
+      if (currentCardIndex > 0) currentCardIndex -= 1;
+
+      currentCard = cards[currentCardIndex];
+      // routes.deleteCard(name);
+      this.setState({ cards, currentCard, currentCardIndex });
+    }
   }
 
   render() {
-    const { cards, currentCard } = this.state;
+    const { currentCard } = this.state;
 
     return (
       <div>
@@ -72,7 +93,7 @@ class App extends Component {
           <h1 className="title">Crypto Facts</h1>
           <Button type="primary" name="Create New Card" event={this.handleOnCreate} />
         </div>
-        <Card card={cards[currentCard]} />
+        <Card card={currentCard} />
         <div className="button-container">
           <Button type="alert" name="Delete" event={this.handleOnDelete} />
           <Button type="secondary" name="Edit" event={this.handleOnUpdate} />
