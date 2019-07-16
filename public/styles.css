@@ -11,7 +11,7 @@ html {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  background-color: aliceblue;
+  background-color: #e7e7e7;
   padding: 0px 10px;
   border: 1px solid #DDD;
   overflow: hidden;
@@ -29,29 +29,53 @@ html {
   align-self: center;
   flex-flow: row nowrap;
   justify-content: space-between;
-  width: 300px;
-  margin: auto;
-}
-
-.header .button-container {
-  margin: 0px;
-  width: 250px;
+  max-width: 300px;
+  margin: 10px auto;
 }
 
 .button {
-  border: 1px solid #DDD;
-  border-radius: 10px;
-  overflow: hidden;
-  vertical-align: top;
+  background-color: #008CBA;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 1px 1px 4px grey;
+  color: rgb(247, 242, 242);
+  padding: 6px 21px;
   text-align: center;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.05);
-  padding: 10px;
-  background-color: rgb(147, 186, 223);
-  width: 100px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.2s; /* Safari */
+  transition-duration: 0.2s;
+  outline: 0;
+  height: 40px;
+  align-self: center;
+}
+
+.button:active {
+  margin: none;
+  box-shadow: none;
 }
 
 .button.alert {
-  background-color: rgb(223, 148, 148);
+  background-color: #f44336;
+}
+
+.button.secondary {
+  color: black;
+  background-color: #d6d0d0;
+}
+
+.button:hover {
+  background-color: rgb(93, 161, 184);
+}
+
+.button.alert:hover {
+  background-color: #f57970;
+}
+
+.button.secondary:hover {
+  background-color: #eeeeee
 }
 
 .card {
