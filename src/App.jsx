@@ -1,20 +1,85 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
+import routes from './routes';
+import { Card, Button } from './components';
+import '../public/styles.css';
 
-class App extends React.Component {
+class App extends Component {
   constructor() {
     super();
     this.state = {
-      title: 'Hello World',
+      cards: [],
+      currentCard: 0,
     };
+
+    this.fetchCard = this.fetchCard.bind(this);
+    this.fetchCards = this.fetchCards.bind(this);
+    this.handleOnNext = this.handleOnNext.bind(this);
+    this.handleOnDelete = this.handleOnDelete.bind(this);
+    this.handleOnUpdate = this.handleOnUpdate.bind(this);
+    this.handleOnCreate = this.handleOnCreate.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchCards();
+  }
+
+  async fetchCard(name) {
+    try {
+      const cards = await routes.fetchCard(name);
+      this.setState({ cards });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async fetchCards() {
+    try {
+      const cards = await routes.fetchCards();
+      this.setState({ cards });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  handleOnNext() {
+    const { cards } = this.state;
+    let { currentCard } = this.state;
+
+    if (currentCard === cards.length - 1) currentCard = 0;
+    else currentCard += 1;
+
+    this.setState({ currentCard });
+  }
+
+  handleOnCreate(card) {
+    routes.createCard(card);
+  }
+
+  handleOnUpdate() {
+
+  }
+
+  handleOnDelete() {
+
   }
 
   render() {
-    const { title } = this.state;
+    const { cards, currentCard } = this.state;
 
     return (
       <div>
-        <h1>{title}</h1>
+        <div className="header">
+          <h1 className="title">Factoid Cards</h1>
+          <div className="button-container">
+            <Button type="standard" name="Create New Card" event={this.handleOnCreate} />
+            <Button type="standard" name="Update Card" event={this.handleOnUpdate} />
+          </div>
+        </div>
+        <Card card={cards[currentCard]} />
+        <div className="button-container">
+          <Button type="alert" name="Delete" event={this.handleOnDelete} />
+          <Button type="standard" name="Next" event={this.handleOnNext} />
+        </div>
       </div>
     );
   }
