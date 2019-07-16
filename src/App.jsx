@@ -22,7 +22,6 @@ class App extends Component {
     this.fetchCards = this.fetchCards.bind(this);
     this.handleOnNext = this.handleOnNext.bind(this);
     this.handleOnDelete = this.handleOnDelete.bind(this);
-    this.handleOnUpdate = this.handleOnUpdate.bind(this);
     this.handleOnCreate = this.handleOnCreate.bind(this);
 
     this.fetchCards();
@@ -63,21 +62,13 @@ class App extends Component {
     routes.createCard(card);
   }
 
-  handleOnUpdate() {
-
-  }
-
   handleOnDelete() {
     let { cards, currentCardIndex, currentCard } = this.state;
+    const confirmDelete = confirm('Are you sure you want to delete this card?');
 
-    // eslint-disable-next-line no-alert
-    const del = confirm('Are you sure you want to delete this card?');
-
-    if (del) {
+    if (confirmDelete) {
       cards = cards.filter(item => item.name !== currentCard.name);
-
       if (currentCardIndex > 0) currentCardIndex -= 1;
-
       currentCard = cards[currentCardIndex];
       // routes.deleteCard(name);
       this.setState({ cards, currentCard, currentCardIndex });
@@ -96,7 +87,6 @@ class App extends Component {
         <Card card={currentCard} />
         <div className="button-container">
           <Button type="alert" name="Delete" event={this.handleOnDelete} />
-          <Button type="secondary" name="Edit" event={this.handleOnUpdate} />
           <Button type="primary" name="Next" event={this.handleOnNext} />
         </div>
       </div>
