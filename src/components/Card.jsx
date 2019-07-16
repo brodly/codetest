@@ -17,7 +17,7 @@ const Card = ({ card }) => {
       <div className="card-content">
         <p className="card-text">{desc}</p>
         <br />
-        <h4 className="fact-title">Factoid:</h4>
+        <h4 className="fact-title">{fact !== '' ? 'Factoid:' : ''}</h4>
         <p className="card-text">{fact}</p>
       </div>
     </div>
@@ -35,10 +35,10 @@ Card.propTypes = {
 
 Card.defaultProps = {
   card: {
-    name: 'title',
-    desc: 'description',
-    fact: 'fact',
-    img_url: 'url',
+    name: '',
+    desc: 'Uh oh! There are no cards in the deck. Feel free to add some of your own.',
+    fact: '',
+    img_url: '',
   },
 };
 
