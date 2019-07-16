@@ -4,14 +4,14 @@
 
 - Backend
   - Server
-    [ ] Setup express server
+    [x] Setup express server
     [ ] API - /card endpoint
-      [ ] Create - post
-      [ ] Read - get - :name
-      [ ] Read all - get
+      [x] Create - post
+      [x] Read - get - :name
+      [x] Read all - get
       [ ] Update - patch - :name
       [ ] Delete  - delete - :name
-    [ ] Serve static files
+    [x] Serve static files
 
   - Database
     [x] Setup table database with user, card, user_card tables
@@ -38,3 +38,4 @@
       [x] getAllCards -> array of all card objs in db
       [ ] updateCard(name, { name, desc, fact }) -> updated card object
       [ ] deleteCard(name)
+      [ ] Error handling
