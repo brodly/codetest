@@ -1,8 +1,10 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-console */
 /* eslint-disable no-restricted-globals */
 import React, { Component } from 'react';
 import routes from './routes';
-import { Card, Button } from './components';
 import '../public/styles.css';
+import { Card, Button, Modal } from './components';
 
 class App extends Component {
   constructor() {
@@ -18,26 +20,21 @@ class App extends Component {
         img_url: 'Loading...',
       },
       editMode: false,
+      showModal: false,
     };
 
-    this.fetchCard = this.fetchCard.bind(this);
     this.fetchCards = this.fetchCards.bind(this);
     this.handleOnNext = this.handleOnNext.bind(this);
     this.handleOnDelete = this.handleOnDelete.bind(this);
     this.handleOnCreate = this.handleOnCreate.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnEditSubmit = this.handleOnEditSubmit.bind(this);
-
-    this.fetchCards();
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
   }
 
-  async fetchCard(name) {
-    try {
-      const cards = await routes.fetchCard(name);
-      this.setState({ cards });
-    } catch (err) {
-      console.log(err);
-    }
+  componentDidMount() {
+    this.fetchCards();
   }
 
   async fetchCards() {
@@ -49,6 +46,14 @@ class App extends Component {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  showModal() {
+    this.setState({ showModal: true });
+  }
+
+  hideModal() {
+    this.setState({ showModal: false });
   }
 
   handleOnChange(data) {
@@ -68,7 +73,9 @@ class App extends Component {
   }
 
   handleOnCreate(card) {
-    routes.createCard(card);
+    const { cards } = this.state;
+    cards.push(card);
+    this.setState({ cards });
   }
 
   handleOnDelete() {
@@ -88,17 +95,24 @@ class App extends Component {
     const { cards, currentCard, currentCardIndex } = this.state;
     const { name } = cards[currentCardIndex];
     routes.updateCard(name, currentCard);
+    this.fetchCards();
   }
 
   render() {
-    const { currentCard, editMode, title } = this.state;
+    const {
+      currentCard,
+      editMode,
+      title,
+      showModal,
+    } = this.state;
 
     return (
       <div>
         <div className="header">
           <h1 className="title">{title}</h1>
-          <Button type="primary" name="Create New Card" event={this.handleOnCreate} />
+          <Button type="primary" name="Create New Card" event={this.showModal} />
         </div>
+        <Modal show={showModal} handleClose={this.hideModal} handleOnCreate={this.handleOnCreate} />
         <Card
           editMode={editMode}
           card={currentCard}
