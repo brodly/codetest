@@ -16,13 +16,9 @@ const EditCard = ({ card, handleOnChange, handleOnEdit }) => {
     handleOnChange(e.target.id, e.target.value);
   };
 
-  const onConfirm = (e) => {
+  const onClick = (e) => {
     handleOnEdit(e.target.innerHTML);
   };
-
-  const onCancel = (e) => {
-
-  }
 
   return (
     <div>
@@ -41,8 +37,8 @@ const EditCard = ({ card, handleOnChange, handleOnEdit }) => {
         <textarea id="fact" type="text" value={fact} onChange={onChange} />
       </div>
       <div className="button-container">
-        <Button type="alert" name="Cancel" event={onCancel} />
-        <Button type="primary" name="Confirm" event={onConfirm} />
+        <Button type="alert" name="Cancel" event={onClick} />
+        <Button type="primary" name="Confirm" event={onClick} />
       </div>
     </div>
   );
