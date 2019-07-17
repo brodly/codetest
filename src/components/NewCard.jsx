@@ -56,16 +56,16 @@ class NewCard extends Component {
     } = this.state;
 
     return (
-      <div>
-        <div className="card-title">
+      <div style={{ textAlign: 'center' }}>
+        <div>
           <div className="edit-label">Title:</div>
           <input id="name" type="text" value={name} onChange={this.onChange} />
         </div>
-        <div className="card-image">
-          <div className="edit-label" style={{ marginLeft: '20px' }}>Image URL:</div>
+        <div>
+          <div className="edit-label">Image URL:</div>
           <input id="img_url" type="text" value={img_url} onChange={this.onChange} />
         </div>
-        <div className="card-content">
+        <div>
           <div className="edit-label">Description:</div>
           <textarea id="desc" type="text" value={desc} onChange={this.onChange} />
           <div className="edit-label">Fact:</div>

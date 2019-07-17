@@ -21,16 +21,16 @@ const EditCard = ({ card, handleOnChange, handleOnEdit }) => {
   };
 
   return (
-    <div>
-      <div className="card-title">
+    <div style={{ textAlign: 'center' }}>
+      <div>
         <div className="edit-label">Title:</div>
         <input id="name" type="text" value={name} onChange={onChange} />
       </div>
-      <div className="card-image">
-        <div className="edit-label" style={{ marginLeft: '20px' }}>Image URL:</div>
+      <div>
+        <div className="edit-label">Image URL:</div>
         <input id="img_url" type="text" value={img_url} onChange={onChange} />
       </div>
-      <div className="card-content">
+      <div>
         <div className="edit-label">Description:</div>
         <textarea id="desc" type="text" value={desc} onChange={onChange} />
         <div className="edit-label">Fact:</div>
