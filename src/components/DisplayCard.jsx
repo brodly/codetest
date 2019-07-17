@@ -26,7 +26,9 @@ const DisplayCard = ({ card, handleOnEdit }) => {
           <h4 className="fact-title">Fact:</h4>
           <p className="card-text">{fact}</p>
         </div>
-        <Button type="secondary" name="Edit" event={onEditButtonClick} />
+        <div className="button-container">
+          <Button type="secondary" name="Edit" event={onEditButtonClick} />
+        </div>
       </div>
     </div>
   );
