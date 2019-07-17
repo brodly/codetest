@@ -33,7 +33,7 @@ router.get('/card/:name', async (req, res) => {
 router.post('/card', async (req, res) => {
   try {
     const { body } = req;
-    db.createCard(body);
+    await db.createCard(body);
     res.sendStatus(200);
   } catch (err) {
     res.sendStatus(500).send('Could not submit new card.');
