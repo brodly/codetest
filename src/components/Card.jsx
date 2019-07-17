@@ -1,14 +1,12 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable camelcase */
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, EditCard, DisplayCard } from '.';
+import { EditCard, DisplayCard } from '.';
 
 const Card = ({ card, editMode, handleOnChange, handleOnEditSubmit }) => {
   const onChange = (key, value) => {
-    const newCard = {
-      currentCard: card,
-    };
+    const newCard = { currentCard: Object.assign({}, card) };
     newCard.currentCard[key] = value;
     handleOnChange(newCard);
   };
