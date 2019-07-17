@@ -74,8 +74,10 @@ class App extends Component {
 
   handleOnCreate(card) {
     const { cards } = this.state;
+    let { currentCardIndex } = this.state;
     cards.push(card);
-    this.setState({ cards });
+    currentCardIndex += 1;
+    this.setState({ cards, currentCard: card, currentCardIndex });
   }
 
   handleOnDelete() {
