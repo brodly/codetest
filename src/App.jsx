@@ -11,11 +11,12 @@ class App extends Component {
       cards: [],
       currentCardIndex: 0,
       currentCard: {
-        name: '',
-        desc: '',
-        fact: '',
-        img_url: '',
+        name: 'Loading...',
+        desc: 'Loading...',
+        fact: 'Loading...',
+        img_url: 'Loading...',
       },
+      editMode: false,
     };
 
     this.fetchCard = this.fetchCard.bind(this);
@@ -23,6 +24,8 @@ class App extends Component {
     this.handleOnNext = this.handleOnNext.bind(this);
     this.handleOnDelete = this.handleOnDelete.bind(this);
     this.handleOnCreate = this.handleOnCreate.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleOnEditSubmit = this.handleOnEditSubmit.bind(this);
 
     this.fetchCards();
   }
@@ -40,10 +43,15 @@ class App extends Component {
     const { currentCardIndex } = this.state;
     try {
       const cards = await routes.fetchCards();
-      this.setState({ cards, currentCard: cards[currentCardIndex] });
+      const currentCard = Object.assign({}, cards[currentCardIndex]);
+      this.setState({ cards, currentCard });
     } catch (err) {
       console.log(err);
     }
+  }
+
+  handleOnChange(data) {
+    this.setState(data);
   }
 
   handleOnNext() {
@@ -53,7 +61,7 @@ class App extends Component {
     if (currentCardIndex === cards.length - 1) currentCardIndex = 0;
     else currentCardIndex += 1;
 
-    currentCard = cards[currentCardIndex];
+    currentCard = Object.assign({}, cards[currentCardIndex]);
 
     this.setState({ currentCard, currentCardIndex });
   }
@@ -69,14 +77,20 @@ class App extends Component {
     if (confirmDelete) {
       cards = cards.filter(item => item.name !== currentCard.name);
       if (currentCardIndex > 0) currentCardIndex -= 1;
-      currentCard = cards[currentCardIndex];
-      // routes.deleteCard(name);
+      routes.deleteCard(currentCard.name);
+      currentCard = Object.assign({}, cards[currentCardIndex]);
       this.setState({ cards, currentCard, currentCardIndex });
     }
   }
 
+  handleOnEditSubmit() {
+    const { cards, currentCard, currentCardIndex } = this.state;
+    const { name } = cards[currentCardIndex];
+    routes.updateCard(name, currentCard);
+  }
+
   render() {
-    const { currentCard } = this.state;
+    const { currentCard, editMode } = this.state;
 
     return (
       <div>
@@ -84,7 +98,12 @@ class App extends Component {
           <h1 className="title">Crypto Facts</h1>
           <Button type="primary" name="Create New Card" event={this.handleOnCreate} />
         </div>
-        <Card card={currentCard} />
+        <Card
+          editMode={editMode}
+          card={currentCard}
+          handleOnChange={this.handleOnChange}
+          handleOnEditSubmit={this.handleOnEditSubmit}
+        />
         <div className="button-container">
           <Button type="alert" name="Delete" event={this.handleOnDelete} />
           <Button type="primary" name="Next" event={this.handleOnNext} />
