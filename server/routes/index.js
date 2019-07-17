@@ -40,12 +40,27 @@ router.post('/card', async (req, res) => {
   }
 });
 
-router.put('/card/:name', (req, res) => {
-  const name = req.params;
+// UPDATE CARD
+router.patch('/card/:name', async (req, res) => {
+  try {
+    const { name } = req.params;
+    const { body } = req;
+    await db.updateCard(name, body);
+    res.sendStatus(200);
+  } catch (err) {
+    res.sendStatus(500).send('Could not update card.');
+  }
 });
 
-router.delete('/card/:name', (req, res) => {
-  const name = req.params;
+// DELETE CARD
+router.delete('/card/:name', async (req, res) => {
+  try {
+    const { name } = req.params;
+    await db.deleteCard(name);
+    res.sendStatus(200);
+  } catch (err) {
+    res.sendStatus(500).send('Could not delete card.');
+  }
 });
 
 module.exports = router;
