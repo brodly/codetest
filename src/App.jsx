@@ -96,8 +96,9 @@ class App extends Component {
   handleOnEditSubmit() {
     const { cards, currentCard, currentCardIndex } = this.state;
     const { name } = cards[currentCardIndex];
+    cards[currentCardIndex] = Object.assign({}, currentCard);
+    this.setState({ cards });
     routes.updateCard(name, currentCard);
-    this.fetchCards();
   }
 
   render() {
