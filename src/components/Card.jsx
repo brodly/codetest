@@ -1,43 +1,29 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable camelcase */
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '.';
+import { Button, EditCard, DisplayCard } from '.';
 
 const Card = ({ card, editMode, handleOnChange, handleOnEditSubmit }) => {
-  let { name, desc, fact, img_url } = card;
-
-  const onChange = (e) => {
+  const onChange = (key, value) => {
     const newCard = {
       currentCard: card,
     };
-    newCard.currentCard[e.target.id] = e.target.value;
+    newCard.currentCard[key] = value;
     handleOnChange(newCard);
   };
 
-  if (editMode) {
-    name = (<input id="name" type="text" value={name} onChange={onChange} />);
-    desc = (<input id="desc" type="text" value={desc} onChange={onChange} />);
-    fact = (<input id="fact" type="text" value={fact} onChange={onChange} />);
-    img_url = (<input id="img_url" type="text" value={img_url} onChange={onChange} />);
-  }
-
-  const handleOnEdit = () => {
-    if (editMode) handleOnEditSubmit();
+  const handleOnEdit = (action) => {
+    if (editMode && action === 'Confirm') handleOnEditSubmit();
     handleOnChange({ editMode: !editMode });
   };
 
   return (
     <div className="card">
-      <h3 className="card-title">{name}</h3>
-      {<img src={img_url} className="card-image" alt="" />}
-      <div className="card-content">
-        <p className="card-text">{desc}</p>
-        <br />
-        <h4 className="fact-title">Fact:</h4>
-        <p className="card-text">{fact}</p>
-      </div>
-      <Button type="secondary" name="Edit" event={handleOnEdit} />
+      {editMode
+        ? <EditCard card={card} handleOnEdit={handleOnEdit} handleOnChange={onChange} />
+        : <DisplayCard card={card} handleOnEdit={handleOnEdit} />
+      }
     </div>
   );
 };
