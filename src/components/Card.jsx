@@ -1,79 +1,45 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable camelcase */
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '.';
 
-class Card extends Component {
-  constructor(props) {
-    super(props);
+const Card = ({ card, editMode, handleOnChange, handleOnEditSubmit }) => {
+  let { name, desc, fact, img_url } = card;
 
-    this.state = {
-      name: 'Title',
-      desc: 'Description',
-      fact: 'Fact',
-      img_url: 'Image Url',
-      editMode: false,
+  const onChange = (e) => {
+    const newCard = {
+      currentCard: card,
     };
+    newCard.currentCard[e.target.id] = e.target.value;
+    handleOnChange(newCard);
+  };
 
-    this.handleEdit = this.handleEdit.bind(this);
-    this.onChange = this.onChange.bind(this);
+  if (editMode) {
+    name = (<input id="name" type="text" value={name} onChange={onChange} />);
+    desc = (<input id="desc" type="text" value={desc} onChange={onChange} />);
+    fact = (<input id="fact" type="text" value={fact} onChange={onChange} />);
+    img_url = (<input id="img_url" type="text" value={img_url} onChange={onChange} />);
   }
 
-  componentDidMount() {
-    const { card } = this.props;
-    const { name, desc, fact, img_url } = card;
-    this.setState({ name, desc, fact, img_url });
-  }
+  const handleOnEdit = () => {
+    if (editMode) handleOnEditSubmit();
+    handleOnChange({ editMode: !editMode });
+  };
 
-  onChange(e) {
-    console.log(e.target.id);
-    this.setState({ [e.target.id]: e.target.value });
-  }
-
-  handleEdit() {
-    let { editMode } = this.state;
-    editMode = !editMode;
-    this.setState({ editMode });
-  }
-
-  render() {
-    const { editMode } = this.state;
-    const { card } = this.props;
-    const { name, desc, fact, img_url } = card;
-
-    return (
-      <div className="card">
-        <h3 className="card-title">
-          {editMode
-            ? (<input id="name" type="text" value={this.state.name} onChange={this.onChange} />)
-            : name}
-        </h3>
-        {editMode
-          ? (<input id="img_url" type="text" value={this.state.img_url} onChange={this.onChange} />)
-          : (<img src={img_url} className="card-image" alt="" />)}
-        <div className="card-content">
-          <p className="card-text">
-            {editMode
-              ? (<input id="desc" type="text" value={this.state.desc} onChange={this.onChange} />)
-              : desc}
-          </p>
-          <br />
-          <h4 className="fact-title">
-            {fact !== ''
-              ? 'Factoid:'
-              : ''}
-          </h4>
-          <p className="card-text">
-            {editMode
-              ? (<input id="fact" type="text" value={this.state.fact} onChange={this.onChange} />)
-              : fact}
-          </p>
-        </div>
-        <Button type="secondary" name="Edit" event={this.handleEdit} />
+  return (
+    <div className="card">
+      <h3 className="card-title">{name}</h3>
+      {<img src={img_url} className="card-image" alt="" />}
+      <div className="card-content">
+        <p className="card-text">{desc}</p>
+        <br />
+        <h4 className="fact-title">{fact !== '' ? 'Factoid:' : ''}</h4>
+        <p className="card-text">{fact}</p>
       </div>
-    );
-  }
+      <Button type="secondary" name="Edit" event={handleOnEdit} />
+    </div>
+  );
 }
 
 Card.propTypes = {
@@ -83,6 +49,9 @@ Card.propTypes = {
     fact: PropTypes.string,
     img_url: PropTypes.string,
   }),
+  editMode: PropTypes.bool,
+  handleOnChange: PropTypes.func,
+  handleOnEditSubmit: PropTypes.func,
 };
 
 Card.defaultProps = {
@@ -92,6 +61,9 @@ Card.defaultProps = {
     fact: '',
     img_url: '',
   },
+  editMode: false,
+  handleOnChange: () => {},
+  handleOnEditSubmit: () => {},
 };
 
 export default Card;
