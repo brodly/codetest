@@ -34,13 +34,13 @@ const Card = ({ card, editMode, handleOnChange, handleOnEditSubmit }) => {
       <div className="card-content">
         <p className="card-text">{desc}</p>
         <br />
-        <h4 className="fact-title">{fact !== '' ? 'Factoid:' : ''}</h4>
+        <h4 className="fact-title">Fact:</h4>
         <p className="card-text">{fact}</p>
       </div>
       <Button type="secondary" name="Edit" event={handleOnEdit} />
     </div>
   );
-}
+};
 
 Card.propTypes = {
   card: PropTypes.shape({
