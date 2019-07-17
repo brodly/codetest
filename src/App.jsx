@@ -8,6 +8,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      title: 'Crypto Facts',
       cards: [],
       currentCardIndex: 0,
       currentCard: {
@@ -90,12 +91,12 @@ class App extends Component {
   }
 
   render() {
-    const { currentCard, editMode } = this.state;
+    const { currentCard, editMode, title } = this.state;
 
     return (
       <div>
         <div className="header">
-          <h1 className="title">Crypto Facts</h1>
+          <h1 className="title">{title}</h1>
           <Button type="primary" name="Create New Card" event={this.handleOnCreate} />
         </div>
         <Card
