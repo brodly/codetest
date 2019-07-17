@@ -1,12 +1,15 @@
 const path = require('path');
 
 module.exports = {
-  entry: path.join(__dirname + '/src/index.jsx'),
+  entry: ['regenerator-runtime/runtime', path.join(__dirname, '/src/index.jsx')],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+        ],
       },
       {
         test: /\.(js|jsx)$/,
