@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:dev": "webpack --watch --mode development",
-    "build:prod": "webpack --mode production",
+    "build": "webpack --mode production",
     "start:dev": "nodemon server/index.js",
-    "start": "node server/index.js"
+    "start": "knex migration:latest && knex seed:run && node server/index.js"
   },
   "repository": {
     "type": "git",
