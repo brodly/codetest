@@ -41,7 +41,7 @@ module.exports = {
       directory: path.join(__dirname, '/database/migrations'),
     },
     seeds: {
-      directory: path.join(__dirname, 'database/seeds'),
+      directory: path.join(__dirname, '/database/seeds'),
     },
   },
 };
