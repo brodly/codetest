@@ -122,7 +122,7 @@ class App extends Component {
           handleOnChange={this.handleOnChange}
           handleOnEditSubmit={this.handleOnEditSubmit}
         />
-        <div className="button-container">
+        <div className="button-container" style={editMode ? { display: 'none' } : { display: 'flex' }}>
           <Button type="alert" name="Delete" event={this.handleOnDelete} />
           <Button type="primary" name="Next" event={this.handleOnNext} />
         </div>
