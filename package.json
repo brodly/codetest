@@ -8,7 +8,7 @@
     "build:dev": "webpack --watch --mode development",
     "build": "webpack --mode production",
     "start:dev": "nodemon server/index.js",
-    "start": "knex migration:latest && knex seed:run && node server/index.js"
+    "start": "knex migrate:latest && knex seed:run && node server/index.js"
   },
   "repository": {
     "type": "git",
