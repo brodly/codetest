@@ -10,5 +10,5 @@ module.exports = {
     delete data.id;
     return db('cards').where('name', name).update(data);
   },
-  deleteCard: (name) => { db('cards').where({ name }).del(); },
+  deleteCard: name => db('cards').where('name', name).del(),
 };
