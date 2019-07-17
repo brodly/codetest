@@ -1,16 +1,34 @@
 - Frontend
   - Views
+    [X] Main App
+    [X] Card
+    [X] Buttons
+      [X] Edit
+      [X] Next
+      [X] Delete
+      [X] Create
+    [ ] Create New Card Modal
+    [ ] Edit Card Display
+      [ ] Cancel edit button
+      [ ] Confirm Edit Button
+      [ ] Edit Fields Clean Display
+    [ ] Default Card View when no cards exist in DB
   - Routes
+    [X] Get
+    [X] GetAll
+    [X] Update
+    [X] Create
+    [X] Delete
 
 - Backend
   - Server
     [x] Setup express server
-    [ ] API - /card endpoint
+    [X] API - /card endpoint
       [x] Create - post
       [x] Read - get - :name
       [x] Read all - get
-      [ ] Update - patch - :name
-      [ ] Delete  - delete - :name
+      [X] Update - patch - :name
+      [X] Delete  - delete - :name
     [x] Serve static files
 
   - Database
@@ -36,6 +54,6 @@
       [x] createCard(name, desc, fact)
       [x] getCard(name) -> card object
       [x] getAllCards -> array of all card objs in db
-      [ ] updateCard(name, { name, desc, fact }) -> updated card object
-      [ ] deleteCard(name)
+      [X] updateCard(name, { name, desc, fact }) -> updated card object
+      [X] deleteCard(name)
       [ ] Error handling
