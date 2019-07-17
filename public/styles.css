@@ -80,7 +80,7 @@ html {
 .card {
   display: inherit;
   height: auto;
-  width: 300px;
+  width: 375px;
   border: 1px solid #DDD;
   border-radius: 10px;
   overflow: hidden;
